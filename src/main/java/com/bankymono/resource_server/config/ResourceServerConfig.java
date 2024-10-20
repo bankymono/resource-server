@@ -17,6 +17,9 @@ public class ResourceServerConfig  extends ResourceServerConfigurerAdapter {
     @Value("${jwt.key}")
     private String jwtKey;
 
+    @Value("${publicKey}")
+    private String publicKey;
+
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -31,7 +34,8 @@ public class ResourceServerConfig  extends ResourceServerConfigurerAdapter {
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter(){
         var converter = new JwtAccessTokenConverter();
-        converter.setSigningKey(jwtKey);
+//        converter.setSigningKey(jwtKey);
+        converter.setVerifierKey(publicKey);
         return converter;
     }
 }
